@@ -1,5 +1,7 @@
 package nz.webshop.Controllers;
 
+import nz.webshop.Servers.CustomerServices;
+import nz.webshop.Servers.ProductServices;
 import nz.webshop.models.Customer.Customer;
 import nz.webshop.models.Customer.CustomerNoPassword;
 import nz.webshop.repositories.*;
@@ -15,67 +17,18 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/api")
-public class CustomerResource {
+public class CustomerController {
 
     @Autowired
     CustomerRepository customerRepository;
     @Autowired
     CustomerRepositoryNoPassword customerRepositoryNoPassword;
-
-
-    @GetMapping(value = "/customerjdbc")
-    public String getAllJDBC() {
-    ResultSet rs = null;
-    Statement stm = null;
-        String result="";
-
-
-        try (Connection con = DriverManager.getConnection(
-                "jdbc:mysql://testfree.czzj8lfy5a3f.eu-central-1.rds.amazonaws.com/webshop","nzuser", "Qwerty11");)
-    {
-        stm = con.createStatement();
-        String query="SELECT product_name as produkter FROM product";
-
-        rs = stm.executeQuery(query);
-
-
-        System.out.println("Question 1 result:");
-
-        ArrayList<String> rowArray= new ArrayList<>();
-
-        while (rs.next()) {
-
-          result=result + " "+ rs.getString(1);
-
-        }
-
-        System.out.println("result: "+result);
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-        finally {
-        try {
-            if(rs != null)
-                rs.close();
-            if (stm != null) {
-                stm.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    return result;
-        }
-
-
-
+    @Autowired
+    CustomerServices customerServices;
 
     @GetMapping(value = "/customertest")
     //public List<CustomerNoPassword> getAll() {return customerRepositoryNoPassword.findAll();}
     public String getAllTest() {return "working";}
-
-
 
     @GetMapping(value = "/customer")
     public List<CustomerNoPassword> getAll() {return customerRepositoryNoPassword.findAll();}
@@ -93,31 +46,15 @@ public class CustomerResource {
 
     @RequestMapping(value = "/customer/login", method = RequestMethod.POST)
     public CustomerNoPassword getOne(@RequestBody Customer customer) {
-        Customer theOneWithPassword = new Customer();
-        CustomerNoPassword theOneNoPassword;// =new CustomerNoPassword();
-        List<Customer> customersList = customerRepository.
-                findCustomerByEmailAndPassword(customer.getEmail(), customer.getPassword());
-        if (customersList.size() >= 1) {
-            theOneNoPassword = null;
-            for (Customer cc : customersList) {
-                if (cc.getPassword().equals(customer.getPassword())) {
-                    System.out.println("fName: " + cc.getFirstName());
-                    theOneWithPassword = cc;
-                    theOneNoPassword = customerRepositoryNoPassword.findOne(theOneWithPassword.getCustomerId());
-                }
-            }
-        } else theOneNoPassword = null;
+        CustomerNoPassword theOneNoPassword=customerServices.getTheOneNoPassword(customer);
         return theOneNoPassword;
     }
-
-
 
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
     public Customer addOne(@RequestBody Customer customer) {
         customerRepository.save(customer);
         return customer;
     }
-
 
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.PUT)
     public Customer updateOne(@PathVariable("id") Integer id, @RequestBody Customer c) {
@@ -127,5 +64,45 @@ public class CustomerResource {
         customerRepository.save(c1);
         return c1;
     }
+
+
+   /* @GetMapping(value = "/customerjdbc")
+    public String getAllJDBC() {
+        ResultSet rs = null;
+        Statement stm = null;
+        String result="";
+
+        try (Connection con = DriverManager.getConnection(
+                "jdbc:mysql://testfree.czzj8lfy5a3f.eu-central-1.rds.amazonaws.com/webshop","xxx", "xxx");)
+        {
+            stm = con.createStatement();
+            String query="SELECT product_name as produkter FROM product";
+
+            rs = stm.executeQuery(query);
+
+            System.out.println("Question 1 result:");
+
+            ArrayList<String> rowArray= new ArrayList<>();
+            while (rs.next()) {
+                result=result + " "+ rs.getString(1);
+                }
+                System.out.println("result: "+result);
+            } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if (stm != null) {
+                    stm.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }*/
+
 
 }
