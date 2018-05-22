@@ -83,17 +83,21 @@ INSERT INTO product VALUES (product_id, 'Watch with a leather strap', 'PREMIUM Q
                             400, 200);
 
 -- Create Category values
+
 INSERT INTO category VALUES (category_id, 'Jeans');
-INSERT INTO category VALUES (category_id, 'Byxor');
+INSERT INTO category VALUES (category_id, 'Non jeans pants');
+INSERT INTO category VALUES (category_id, 'All pants');
+
 INSERT INTO category VALUES (category_id, 'Shoes');
 INSERT INTO category VALUES (category_id, 'Watches');
 
 -- Create ProductCategory
 INSERT INTO productcategory VALUES (1, 1);
-INSERT INTO productcategory VALUES (1, 2);
+INSERT INTO productcategory VALUES (1, 3);
 INSERT INTO productcategory VALUES (2, 2);
-INSERT INTO productcategory  VALUES (3, 3);
-INSERT INTO productcategory  VALUES (4, 4);
+INSERT INTO productcategory VALUES (2, 3);
+INSERT INTO productcategory  VALUES (3, 4);
+INSERT INTO productcategory  VALUES (4, 5);
 
 -- Create Order values
 INSERT INTO orders VALUES (order_id, 1, '2017-02-08 17:23:17');
