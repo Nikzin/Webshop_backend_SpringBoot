@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    public static final String FIND_PRODUCTS = "SELECT product_id, product_name, description, image_url FROM product";
+    /*public static final String FIND_PRODUCTS = "SELECT product_id, product_name, description, image_url FROM product";
     @Query(value = FIND_PRODUCTS, nativeQuery = true)
     public List<Object> findProducts();
     Product findProductsByListOfCategories(Integer id);
-    List<Product> findProductsByListOfCategoriesContaining(Category category);
+    List<Product> findProductsByListOfCategoriesContaining(Category category);*/
 
 }

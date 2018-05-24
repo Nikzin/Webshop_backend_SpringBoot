@@ -9,10 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories(basePackages = "nz.webshop.repositories")
 @SpringBootApplication
-//public class WebshopApplication {
+
 public class WebshopApplication extends SpringBootServletInitializer {
-
-
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

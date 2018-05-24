@@ -1,7 +1,7 @@
 package nz.webshop.Controllers;
 
 import nz.webshop.Servers.CustomerServices;
-import nz.webshop.Servers.ProductServices;
+
 import nz.webshop.models.Customer.Customer;
 import nz.webshop.models.Customer.CustomerNoPassword;
 import nz.webshop.repositories.*;
@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
