@@ -18,6 +18,13 @@ apply plugin: 'war'
 group = 'NZ'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+dependencies {
+
+	// modelmapper
+	compile 'org.modelmapper:modelmapper:2.3.3'
+
+
+}
 
 repositories {
 	mavenCentral()

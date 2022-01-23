@@ -1,8 +1,9 @@
 package nz.webshop.models.Customer;
 
 
+
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @Table (name ="customer")
@@ -25,8 +26,17 @@ public class CustomerNoPassword {
     private String postalCode;
     private String city;
 
+    //@OneToOne (targetEntity = Password.class, mappedBy = "customer")
+    @OneToOne ( targetEntity = Password.class, mappedBy = "customer")
+    private Password passwordEntity;
 
+    public Password getPasswordEntity() {
+        return passwordEntity;
+    }
 
+    public void setPasswordEntity(Password password) {
+        this.passwordEntity = password;
+    }
 
     public Integer getCustomerId() {
         return customerId;
@@ -92,5 +102,32 @@ public class CustomerNoPassword {
         this.city = city;
     }
 
+
+
+    public CustomerNoPassword() {
+    }
+
+    public CustomerNoPassword(String firstName, String lastName, String email,
+                              String phone, String address, String postalCode, String city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+
+        this.phone = phone;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.city = city;
+    }
+    public void setCustomerNoPassword(String firstName, String lastName, String email,
+                           String phone, String address, String postalCode, String city){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+
+        this.phone = phone;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.city = city;
+    }
 
 }

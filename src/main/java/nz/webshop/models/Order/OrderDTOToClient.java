@@ -8,7 +8,7 @@ import java.util.List;
 import nz.webshop.models.Product.*;
 
 
-public class OrderMiniMax {
+public class OrderDTOToClient {
 
 
     private Integer Id;
@@ -23,12 +23,12 @@ public class OrderMiniMax {
 
    private List<Products> products;
 
-    public OrderMiniMax() {
+    public OrderDTOToClient() {
     }
 
-    public OrderMiniMax(Integer id, Integer customer_id, String dateTime, List<Products> products) {
+    public OrderDTOToClient(Integer id, Integer customerId, String dateTime, List<Products> products) {
         Id = id;
-        this.customerId = customer_id;
+        this.customerId = customerId;
         this.dateTime = dateTime;
         this.products = products;
     }
